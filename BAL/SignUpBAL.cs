@@ -28,9 +28,9 @@ namespace BAL
                 if (!(Char.IsLetter(c) || Char.IsNumber(c))) { return -5; } //Lỗi chứa ký tự đặc biệt hoặc khoảng trắng
             }
             if (!dal.AccountUsernameAvailable(username)) { return -6; } //Lỗi username không khả dụng
-            
 
-            if (dal.CreateAcc(username, password)) { return 1; } //Trạng thái tạo tài khoản thành công
+            string encryptedPassword = Encrypt.MD5Hash(password);
+            if (dal.CreateAccount(username, encryptedPassword)) { return 1; } //Trạng thái tạo tài khoản thành công
 
             return -1;
 

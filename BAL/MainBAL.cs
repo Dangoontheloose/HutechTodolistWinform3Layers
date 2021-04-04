@@ -70,9 +70,9 @@ namespace BAL
 
 
             //returnTasks = activeTasks;
-           
-            
-            
+
+
+
             switch (sortType)
             {
                 case SortType.Default:
@@ -97,8 +97,35 @@ namespace BAL
         //hàm cập nhật trạng thái hoàn thành được gọi trực tiếp từ Main(thông qua các TaskBox)
         public bool Main_UpdateTaskState(int taskID, int progress, DateTime dueDate, DateTime? finishDate)
         {
-            if (progress == 0) { finishDate = null; }
-            if (progress == 1 && finishDate == null) { finishDate = DateTime.Today; }
+            if (progress == 0)
+            {
+                finishDate = null;
+                if (activeAccount.AuditState == 1)
+                {
+
+                    UserActivity userActivity = new UserActivity()
+                    {
+                        AccID = dal.GetAccountIDFromUsername(activeAccount.Username),
+                        Datetime = DateTime.Now,
+                        Activity = "Xóa trạng thái hoàn thành [" + taskID + "]"
+                    };
+                    if (!dal.UpdateActivity(userActivity)) { Console.WriteLine("Loi luu activity"); };
+                }
+            }
+            if (progress == 1 && finishDate == null)
+            {
+                finishDate = DateTime.Today;
+                if (activeAccount.AuditState == 1)
+                {
+                    UserActivity userActivity = new UserActivity()
+                    {
+                        AccID = dal.GetAccountIDFromUsername(activeAccount.Username),
+                        Datetime = DateTime.Now,
+                        Activity = "Hoàn thành task [" + taskID + "]"
+                    };
+                    if (!dal.UpdateActivity(userActivity)) { Console.WriteLine("Loi luu activity"); };
+                }
+            }
             int state = UpdateStateByProgressAndDate(progress, dueDate, finishDate);
 
             return dal.UpdateTaskStateByTaskID(taskID, progress, state, finishDate);
@@ -128,13 +155,23 @@ namespace BAL
             activeAccount = account;
         }
 
-       public string LoadUserName()
+        public string LoadUserName()
         {
             return activeAccount.Username;
         }
 
-
-        
-
+        public void Main_LogOut()
+        {
+            if (activeAccount.AuditState == 1)
+            {
+                UserActivity userActivity = new UserActivity()
+                {
+                    AccID = activeAccount.AccID,
+                    Datetime = DateTime.Now,
+                    Activity = "User đăng xuất"
+                };
+                if (!dal.UpdateActivity(userActivity)) { Console.WriteLine("loi luu activity"); };
+            }
+        }
     }
 }

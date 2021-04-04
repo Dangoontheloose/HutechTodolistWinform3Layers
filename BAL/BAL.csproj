@@ -41,11 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminMainBAL.cs" />
     <Compile Include="DetailBAL.cs" />
+    <Compile Include="Encrypt.cs" />
     <Compile Include="SignInBAL.cs" />
     <Compile Include="MainBAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignUpBAL.cs" />
+    <Compile Include="UserDetailsBAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

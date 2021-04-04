@@ -42,6 +42,8 @@
             this.chb_Progress = new System.Windows.Forms.CheckBox();
             this.lb_state = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cb_Assignee = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // txt_TaskName
@@ -170,11 +172,30 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "Priority: \r\nHigh = !!!\r\nMedium = !!\r\nLow = !";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(22, 332);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 17);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Assignee";
+            // 
+            // cb_Assignee
+            // 
+            this.cb_Assignee.FormattingEnabled = true;
+            this.cb_Assignee.Location = new System.Drawing.Point(22, 352);
+            this.cb_Assignee.Name = "cb_Assignee";
+            this.cb_Assignee.Size = new System.Drawing.Size(121, 24);
+            this.cb_Assignee.TabIndex = 12;
+            // 
             // DetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(432, 334);
+            this.ClientSize = new System.Drawing.Size(432, 400);
+            this.Controls.Add(this.cb_Assignee);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lb_state);
             this.Controls.Add(this.chb_Progress);
@@ -215,5 +236,7 @@
         private System.Windows.Forms.CheckBox chb_Progress;
         private System.Windows.Forms.Label lb_state;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cb_Assignee;
     }
 }

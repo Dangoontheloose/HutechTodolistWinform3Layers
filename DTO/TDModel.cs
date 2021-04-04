@@ -15,8 +15,8 @@ namespace DTO
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Priority> Priorities { get; set; }
         public virtual DbSet<State> States { get; set; }
-        public virtual DbSet<Subtask> Subtasks { get; set; }
         public virtual DbSet<TodoTask> TodoTasks { get; set; }
+        public virtual DbSet<UserActivity> UserActivities { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

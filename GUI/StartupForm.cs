@@ -14,12 +14,12 @@ namespace GUI
     {
 
         SignInTab siTab;
-        SignUpTab suTab;
+        //SignUpTab suTab;
         public StartupForm()
         {
             InitializeComponent();
             siTab = new SignInTab();
-            suTab = new SignUpTab();
+            //suTab = new SignUpTab();
 
             siTab.LogInSuccess += SiTab_LogInSuccess;
         }
@@ -38,12 +38,24 @@ namespace GUI
 
             SignInTab s = sender as SignInTab;
             //Khởi tạo hàm main với acc ID của tài khoản đã đăng nhập từ tab sign in
-            Main main = new Main(s.accID);
-            main.FormClosed += Main_FormClosed;
+            if (s.accType == 1)
+            {
+                MainAdmin main = new MainAdmin(s.accID);
+                main.FormClosed += Main_FormClosed;
+                main.Show();
+                this.Hide();
 
-            main.Show();
-            //Ẩn form đăng nhập
-            this.Hide();
+            }
+            else
+            {
+
+                Main main = new Main(s.accID);
+                main.FormClosed += Main_FormClosed;
+                main.Show();
+                this.Hide();
+                //Ẩn form đăng nhập
+            }
+
         }
 
         //Hàm gọi mỗi khi form main đóng
@@ -53,21 +65,13 @@ namespace GUI
             this.Show();
             //reset các trường
             siTab.Password = "";
-            suTab.Username = "";
-            suTab.PassConfirm = "";
-            suTab.Password = "";
         }
 
 
-        private void btn_SignInTab_Click(object sender, EventArgs e)
-        {
-            SwitchTab(siTab);
-        }
-
-        private void btn_SignUpTab_Click(object sender, EventArgs e)
-        {
-            SwitchTab(suTab);
-        }
+        //private void btn_SignUpTab_Click(object sender, EventArgs e)
+        //{
+        //    SwitchTab(suTab);
+        //}
 
         private void StartupForm_Load(object sender, EventArgs e)
         {

@@ -12,7 +12,6 @@ namespace DTO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TodoTask()
         {
-            Subtasks = new HashSet<Subtask>();
         }
 
         [Key]
@@ -35,6 +34,7 @@ namespace DTO
         public int StateID { get; set; }
 
         public int AccID { get; set; }
+        public string Username { get; set; }
 
         public virtual Account Account { get; set; }
 
@@ -42,7 +42,5 @@ namespace DTO
 
         public virtual State State { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Subtask> Subtasks { get; set; }
     }
 }

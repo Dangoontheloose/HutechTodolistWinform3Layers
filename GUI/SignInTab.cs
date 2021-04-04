@@ -18,6 +18,7 @@ namespace GUI
         public string Password { get => txt_password.Text; set => txt_password.Text = value; }
 
         public int accID;
+        public int accType;
         public SignInTab()
         {
             InitializeComponent();
@@ -44,6 +45,7 @@ namespace GUI
                 default:
                     MessageBox.Show("Đăng nhập thành công!");
                     accID = signInState;
+                    accType = bal_si.Login_GetAccountTypeFromLoginInput(Username, Password);
                     OnLogInSuccess();
                     break;
             }

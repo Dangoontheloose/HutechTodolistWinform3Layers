@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_Add = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -64,17 +63,6 @@
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btn_Add
-            // 
-            this.btn_Add.Location = new System.Drawing.Point(-1, 98);
-            this.btn_Add.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(119, 50);
-            this.btn_Add.TabIndex = 3;
-            this.btn_Add.Text = "New Task";
-            this.btn_Add.UseVisualStyleBackColor = true;
-            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -93,7 +81,6 @@
             this.panel1.Controls.Add(this.lb_AllCount);
             this.panel1.Controls.Add(this.lb_UpcomingCount);
             this.panel1.Controls.Add(this.lb_TodayCount);
-            this.panel1.Controls.Add(this.btn_Add);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.btn_SignOut);
             this.panel1.Controls.Add(this.btn_Past);
@@ -412,7 +399,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btn_Add;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_Past;

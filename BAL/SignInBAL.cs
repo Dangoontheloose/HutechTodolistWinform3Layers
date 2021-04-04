@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
+using DTO;
 namespace BAL
 {
     public class SignInBAL
     {
         MainDAL dal = new MainDAL();
-
         /// <summary>
         /// Trả về Account ID nếu đúng tên người dùng và password
         /// </summary>
@@ -25,9 +25,27 @@ namespace BAL
                 if (!(Char.IsLetter(c) || Char.IsNumber(c))) { return -4; } //lỗi chứa ký tự đặc biệt hoặc khoảng trắng
             }
 
-            int id = dal.GetAccountIDFromLoginInput(username, password); //đăng nhập thành công 
+            string encryptedPassword = Encrypt.MD5Hash(password);
+            int id = dal.GetAccountIDFromLoginInput(username, encryptedPassword); //đăng nhập thành công 
+            if (id != -1 && dal.GetAuditStateFromUsername(username) == 1)
+            {
+                UserActivity userActivity = new UserActivity()
+                {
+                    AccID = id,
+                    Datetime = DateTime.Now,
+                    Activity = "User đăng nhập thành công"
+                };
+                if (!dal.UpdateActivity(userActivity)) { Console.WriteLine("Loi luu activity"); };
+            }
+
 
             return id;//trả về Acc ID đẵ đăng nhập thành công
+        }
+
+        public int Login_GetAccountTypeFromLoginInput(string username, string password)
+        {
+            string encryptedPassword = Encrypt.MD5Hash(password);
+            return dal.GetAccountTypeFromLoginInput(username, encryptedPassword);
         }
     }
 }

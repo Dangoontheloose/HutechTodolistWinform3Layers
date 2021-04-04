@@ -16,7 +16,7 @@ namespace GUI
     {
         int flpCurrentW;
 
-        
+
 
         MainBAL bal;
         //acc ID của tài khoản được load vào Form Main (tài khoản đã đăng nhập)
@@ -39,9 +39,9 @@ namespace GUI
         //property SortType set & get dữ liệu từ combobox SortType
         public int SortType { get => cb_SortType.SelectedIndex; set => cb_SortType.SelectedIndex = value; }
         //property State set & get dữ liệu từ combobox State
-        public int PanelType { get ; set ; }
-        
-        
+        public int PanelType { get; set; }
+
+
         /// <summary>
         /// Form Main được khởi tạo với tham số accID của account đã được log in
         /// </summary>
@@ -60,14 +60,14 @@ namespace GUI
             flpCurrentW = flp_Today.Size.Width;
         }
 
-        
-        
+
+
         /// <summary>
         /// Hàm tạo ra các taskbox từ list và load nó vào panel tương ứng
         /// </summary>
         /// <param name="panel"></param>
         /// <param name="list"></param>
-        private void CreateAndLoadTaskbox(FlowLayoutPanel panel,List<TodoTask> list)
+        private void CreateAndLoadTaskbox(FlowLayoutPanel panel, List<TodoTask> list)
         {
             panel.Controls.Clear();
 
@@ -197,7 +197,7 @@ namespace GUI
             DetailForm f = new DetailForm(accID, currentTB.TaskboxID);
             //subscribe event mỗi khi task đã được update qua form detail
             f.TaskUpdated += F_TaskUpdated;
-            
+
             f.Show();
         }
         /// <summary>
@@ -213,14 +213,6 @@ namespace GUI
         }
 
 
-        private void btn_Add_Click(object sender, EventArgs e)
-        {
-            //Tạo form detail mới, tham số truyền vào xác định account sẽ dc thêm mới task
-            DetailForm f = new DetailForm(accID);
-            //subscribe event mỗi khi task đã được update (tạo mới) qua form detail
-            f.TaskUpdated += F_TaskUpdated;
-            f.Show();
-        }
         /// <summary>
         /// Hàm gọi mỗi khi giá trị của combobox SortType bị thay đổi => reload panel theo sort type đã chọn
         /// </summary>
@@ -278,6 +270,7 @@ namespace GUI
         private void btn_SignOut_Click(object sender, EventArgs e)
         {
             this.Close();
+            bal.Main_LogOut();
         }
         private int ResizeAllTaskboxInPanel(FlowLayoutPanel flp)
         {
@@ -288,7 +281,7 @@ namespace GUI
             else
             {
                 flpCurrentW = flp.Size.Width;
-                foreach (Control  item in flp.Controls)
+                foreach (Control item in flp.Controls)
                 {
                     item.Width = flpCurrentW - 10;
                 }

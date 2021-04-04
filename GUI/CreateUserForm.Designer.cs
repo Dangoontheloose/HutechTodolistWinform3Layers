@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class SignUpTab
+    partial class CreateUserForm
     {
         /// <summary> 
         /// Required designer variable.
@@ -42,11 +42,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(212, 23);
+            this.label1.Location = new System.Drawing.Point(168, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 29);
+            this.label1.Size = new System.Drawing.Size(197, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Sign Up";
+            this.label1.Text = "Create new user";
             // 
             // label2
             // 
@@ -100,7 +100,7 @@
             // 
             // btn_CreateAcc
             // 
-            this.btn_CreateAcc.Location = new System.Drawing.Point(217, 227);
+            this.btn_CreateAcc.Location = new System.Drawing.Point(217, 247);
             this.btn_CreateAcc.Name = "btn_CreateAcc";
             this.btn_CreateAcc.Size = new System.Drawing.Size(98, 30);
             this.btn_CreateAcc.TabIndex = 6;
@@ -108,10 +108,11 @@
             this.btn_CreateAcc.UseVisualStyleBackColor = true;
             this.btn_CreateAcc.Click += new System.EventHandler(this.btn_CreateAcc_Click);
             // 
-            // SignUpTab
+            // CreateUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(518, 289);
             this.Controls.Add(this.btn_CreateAcc);
             this.Controls.Add(this.txt_passconfirm);
             this.Controls.Add(this.txt_password);
@@ -120,8 +121,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "SignUpTab";
-            this.Size = new System.Drawing.Size(536, 270);
+            this.Name = "CreateUserForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 

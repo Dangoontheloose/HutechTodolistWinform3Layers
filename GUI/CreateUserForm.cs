@@ -11,14 +11,14 @@ using BAL;
 
 namespace GUI
 {
-    public partial class SignUpTab : UserControl
+    public partial class CreateUserForm : Form
     {
         public string Username { get => txt_username.Text; set => txt_username.Text = value; }
         public string Password { get => txt_password.Text; set => txt_password.Text = value; }
         public string PassConfirm { get => txt_passconfirm.Text; set => txt_passconfirm.Text = value; }
 
         SignUpBAL bal_su;
-        public SignUpTab()
+        public CreateUserForm()
         {
             InitializeComponent();
             bal_su = new SignUpBAL();
@@ -45,11 +45,16 @@ namespace GUI
                     MessageBox.Show("Username đã tồn tại!");
                     break;
                 case 1:
-                    MessageBox.Show("Tạo tài khoản thành công mời đăng nhập!");
+                    MessageBox.Show("Tạo tài khoản thành công!");
                     break;
                 default:
                     MessageBox.Show("Tạo tài khoản thất bại!");
                     break;
+            }
+
+            if (signUpState == 1)
+            {
+                this.Close();
             }
         }
     }

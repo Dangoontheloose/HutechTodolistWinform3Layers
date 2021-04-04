@@ -17,7 +17,7 @@ namespace BAL
         MainDAL dal = new MainDAL();
 
         TodoTask activeTask;
-        
+        Account activeAccount;
 
 
 
@@ -25,6 +25,7 @@ namespace BAL
         public DetailBAL(int accID, int taskID)
         {
             activeTask = dal.GetTaskByTaskID(taskID);//load task đang được edit
+            activeAccount = dal.GetAccountFromID(accID);
         }
 
         //Nếu khởi tạo bal không có tham số task ID truyền vào => Tạo task mới
@@ -43,8 +44,9 @@ namespace BAL
         /// <param name="dueDate"></param>
         /// <param name="state"></param>
         /// <returns>Trả về trạng thái hoàn thành hoặc kiểu lỗi</returns>
-        public int Detail_UpateTaskByUserInput(string taskname, string des, int prio, DateTime dueDate, int progress)
+        public int Detail_UpdateTaskByUserInput(string taskname, string des, int prio, DateTime dueDate, int progress, string assignee)
         {
+
             if (taskname == "") { return -1; } //lỗi Để trống Task name
 
             activeTask.Taskname = taskname;
@@ -52,10 +54,38 @@ namespace BAL
             activeTask.PriID = prio;
             activeTask.DueDate = dueDate;
             activeTask.Progress = progress;
+            activeTask.Username = assignee;
             //Nếu chuyển thành trạng thái không hoàn thành => xóa ngày hoàn thành
-            if (progress == 0) { activeTask.FinishDate = null; }
+            if (progress == 0)
+            {
+                activeTask.FinishDate = null;
+                if (dal.GetAuditStateFromUsername(assignee) == 1)
+                {
+                    UserActivity userActivity = new UserActivity()
+                    {
+                        AccID = dal.GetAccountIDFromUsername(assignee),
+                        Datetime = DateTime.Now,
+                        Activity = "Xóa trạng thái hoàn thành [" + activeTask.TaskID + "]"
+                    };
+                    if (!dal.UpdateActivity(userActivity)) { Console.WriteLine("loi luu activity"); };
+                }
+            }
             //Nếu chuyển thành trạng thái hoàn thành => thêm ngày hoàn thành là hôm nay
-            if(progress == 1 && activeTask.FinishDate == null) { activeTask.FinishDate = DateTime.Today; }
+            if (progress == 1 && activeTask.FinishDate == null)
+            {
+                if (dal.GetAuditStateFromUsername(assignee) == 1)
+                {
+                    activeTask.FinishDate = DateTime.Today;
+                    UserActivity userActivity = new UserActivity()
+                    {
+                        AccID = dal.GetAccountIDFromUsername(assignee),
+                        Datetime = DateTime.Now,
+                        Activity = "Hoàn thành task [" + activeTask.TaskID + "]"
+                    };
+                    if (!dal.UpdateActivity(userActivity)) { Console.WriteLine("loi luu activity"); };
+                }
+
+            }
             //Cho update State dựa trên progress, ngày hạn và ngày hoàn thành
             activeTask.StateID = UpdateStateByProgressAndDate(progress, dueDate, activeTask.FinishDate);
 
@@ -80,7 +110,7 @@ namespace BAL
                 //da qua due date => 3(tre han) otherwise 1(dang trong tien trinh (con han))
                 return due < DateTime.Today ? 3 : 1;
             }
-            
+
         }
         /// <summary>
         /// Lấy tất cả các priority từ dữ liệu (để nạp vào combo box)
@@ -89,6 +119,11 @@ namespace BAL
         public string[] Detail_GetPriorityRange()
         {
             return dal.GetAllPriorityOptions();
+        }
+
+        public string[] Detail_GetAssigneeRange()
+        {
+            return dal.GetAllAssigneeOptions();
         }
 
         /// <summary>
@@ -105,11 +140,12 @@ namespace BAL
         public DateTime Detail_GetDueDate() { return activeTask.DueDate; }
         public int Detail_GetPrio() { return activeTask.PriID; }
         public int Detail_GetStateID() { return activeTask.StateID; }
-        public string Detail_GetStateName() 
+        public string Detail_GetAssignee() { return activeTask.Username; }
+        public string Detail_GetStateName()
         {
             return activeTask.State.StateName;
         }
-        
+
         public int Detail_GetProgress() { return activeTask.Progress; }
 
 

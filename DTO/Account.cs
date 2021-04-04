@@ -26,7 +26,11 @@ namespace DTO
         [StringLength(50)]
         public string Password { get; set; }
 
+        [Required]
+        public int Type { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TodoTask> TodoTasks { get; set; }
+        public int AuditState { get; set; }
     }
 }

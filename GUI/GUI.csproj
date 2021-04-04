@@ -67,17 +67,23 @@
     <Compile Include="DetailForm.Designer.cs">
       <DependentUpon>DetailForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainAdmin.Designer.cs">
+      <DependentUpon>MainAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="SignInTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SignInTab.Designer.cs">
       <DependentUpon>SignInTab.cs</DependentUpon>
     </Compile>
-    <Compile Include="SignUpTab.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="CreateUserForm.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SignUpTab.Designer.cs">
-      <DependentUpon>SignUpTab.cs</DependentUpon>
+    <Compile Include="CreateUserForm.Designer.cs">
+      <DependentUpon>CreateUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="StartupForm.cs">
       <SubType>Form</SubType>
@@ -99,14 +105,23 @@
     <Compile Include="TaskBox.Designer.cs">
       <DependentUpon>TaskBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserDetails.Designer.cs">
+      <DependentUpon>UserDetails.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DetailForm.resx">
       <DependentUpon>DetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainAdmin.resx">
+      <DependentUpon>MainAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SignInTab.resx">
       <DependentUpon>SignInTab.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SignUpTab.resx">
-      <DependentUpon>SignUpTab.cs</DependentUpon>
+    <EmbeddedResource Include="CreateUserForm.resx">
+      <DependentUpon>CreateUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StartupForm.resx">
       <DependentUpon>StartupForm.cs</DependentUpon>
@@ -125,6 +140,9 @@
     </Compile>
     <EmbeddedResource Include="TaskBox.resx">
       <DependentUpon>TaskBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserDetails.resx">
+      <DependentUpon>UserDetails.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
